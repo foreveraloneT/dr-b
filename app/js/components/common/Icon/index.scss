@@ -1,0 +1,21 @@
+.bo-icon-wrapper {
+  .bo-icon-class {
+    cursor: pointer;
+    color: var(--icon-color);
+    &:hover {
+      color: var(--hover-color);
+    }
+  }
+
+  .bo-icon-img {
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: var(--icon-img);
+    &:hover {
+      opacity: var(--hover-opacity);
+      background-image: var(--hover-img);
+    }
+  }
+}

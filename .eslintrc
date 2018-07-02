@@ -1,0 +1,55 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true,
+    "jest": true
+  },
+  "plugins": [
+    "import",
+    "react"
+  ],
+  "settings": {
+    "import/parser": "babel-eslint"
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "class-methods-use-this": 0,
+    "semi": 0,
+    "comma-dangle": 0,
+    "import/no-unresolved": "error",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-indent": [
+      2,
+      2
+    ],
+    "react/jsx-indent-props": [
+      2,
+      2
+    ],
+    "react/jsx-no-duplicate-props": 2,
+    "react/jsx-space-before-closing": 2,
+    "no-underscore-dangle": 0,
+    "linebreak-style": 0,
+    "no-use-before-define": 0,
+    "prefer-const": 0,
+    "arrow-body-style": 0,
+    "react/prop-types": 0,
+    "eqeqeq": 0,
+    "strict": 0,
+    "max-len": 0,
+    "no-undef": 0
+  }
+}

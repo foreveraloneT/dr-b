@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: chart-starterkit
+    ports:
+      - 9000:8080
+    environment:
+      - METRICS_HOST=http://192.168.11.5
+      - PRD_VERS=alpha

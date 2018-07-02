@@ -1,0 +1,54 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  padding: 0px;
+  margin: 0px;
+  color: #333;
+  background-color: #ffffff;
+  height: 100%;
+  #app {
+    height: 100%;
+    >div {
+      height: 100%;
+    }
+  }
+}
+
+input, button {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+  cursor: pointer;
+  color: #51a1ff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+input[type="radio"]:focus,
+input[type="checkbox"]:focus,
+select:focus {
+  outline: none;
+}
