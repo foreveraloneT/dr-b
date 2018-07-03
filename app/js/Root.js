@@ -10,17 +10,15 @@ import {
 class Root extends Component {
   render() {
     return (
-      <MainLayout>
-        <Router>
-          <BrowserRouter>
-            <Switch>
-              <Route path='/' exact component={ Home } />
-              <Route path='/Test' exact component={ Test } />
-              <Route path='*' render={ () => <h1>Page Not Found</h1> } />
-            </Switch>
-          </BrowserRouter>
-        </Router>
-      </MainLayout>
+      <Router>
+        <BrowserRouter>
+          <Switch>
+            <Route path='/' exact component={ Home } />
+            <Route path='/Test' exact component={ Test } />
+            <Route path='*' render={ () => <h1>Page Not Found</h1> } />
+          </Switch>
+        </BrowserRouter>
+      </Router>
     )
   }
 }

@@ -1,32 +1,51 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { Container } from 'react-grid-system'
 import {
-  AppBar,
   Toolbar,
   IconButton,
 } from '@material-ui/core'
 import {
-  Menu as MenuIcon,
+  AccountCircle as AccountIcon,
 } from '@material-ui/icons'
 
-import { SearchInput } from '../../common'
+import {
+  SearchInput,
+  AppBar,
+  NavigationMenu,
+} from '../../common'
+import './index.scss'
 
 class MainLayout extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+  }
+
+  static defaultProps = {
+    className: '',
+  }
+
   render() {
+    const { className } = this.props
+
     return (
-      <div className="main-layput-wrapper">
+      <div className={classNames('main-layput-wrapper', className)}>
         <AppBar position="static">
           <Toolbar>
-              <IconButton>
-                <MenuIcon />
-              </IconButton>
-              <SearchInput
-                id="uni-search"
-                placeholder="search"
-              />
+            <IconButton>
+              <AccountIcon style={{ fontSize: 34 }} />
+            </IconButton>
+            <SearchInput
+              id="uni-search"
+              placeholder="search"
+            />
           </Toolbar>
         </AppBar>
-        { this.props.children }
+        <NavigationMenu />
+        <Container>
+          {this.props.children}
+        </Container>
       </div>
     )
   }

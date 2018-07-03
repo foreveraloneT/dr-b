@@ -12,7 +12,7 @@ const rootEl = document.getElementById('app')
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: 'light',
   },
 })
 
