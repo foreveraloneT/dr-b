@@ -7,5 +7,6 @@ export default class Group extends BaseModel {
     name: '',
     description: '',
     color: '#000000',
+    isFavorite: false,
   }
 }

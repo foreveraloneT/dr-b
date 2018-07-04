@@ -33,7 +33,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'main-[hash].js'
+    filename: 'main-[hash].js',
+    publicPath: '/'
   },
   module: {
     rules: [

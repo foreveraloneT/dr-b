@@ -35,7 +35,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dev'),
-    filename: 'main.js'
+    filename: 'main.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -89,6 +90,7 @@ module.exports = {
     port: PORT,
     hot: true,
     contentBase: './app',
+    publicPath: '/',
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,

@@ -5,44 +5,51 @@ import { Container } from 'react-grid-system'
 import {
   Toolbar,
   IconButton,
+  Typography,
 } from '@material-ui/core'
 import {
-  AccountCircle as AccountIcon,
+  KeyboardBackspace as BackIcon,
 } from '@material-ui/icons'
+import { withRouter } from 'react-router-dom'
 
 import {
-  SearchInput,
   AppBar,
-  NavigationMenu,
 } from '../../common'
-import './index.scss'
+// import './index.scss'
 
-class MainLayout extends Component {
+class TitleWithBackLayout extends Component {
   static propTypes = {
+    history: PropTypes.object.isRequired,
     className: PropTypes.string,
+    title: PropTypes.string,
   }
 
   static defaultProps = {
     className: '',
+    title: 'Title',
+  }
+
+  goBack = () => {
+    const { history } = this.props
+    history.goBack()
   }
 
   render() {
-    const { className } = this.props
-
+    const { className, title } = this.props
     return (
-      <div className={classNames('main-layput-wrapper', className)}>
+      <div className={classNames('title-layput-wrapper', className)}>
         <AppBar position="static">
           <Toolbar>
             <IconButton>
-              <AccountIcon style={{ fontSize: 34 }} />
+              <BackIcon
+                onClick={this.goBack}
+              />
             </IconButton>
-            <SearchInput
-              id="uni-search"
-              placeholder="search"
-            />
+            <Typography variant="title" color="inherit">
+              {title}
+            </Typography>
           </Toolbar>
         </AppBar>
-        <NavigationMenu />
         <Container style={{ marginTop: 10 }}>
           {this.props.children}
         </Container>
@@ -51,4 +58,4 @@ class MainLayout extends Component {
   }
 }
 
-export default MainLayout
+export default withRouter(TitleWithBackLayout)
