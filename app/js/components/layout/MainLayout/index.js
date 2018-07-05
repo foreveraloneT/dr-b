@@ -31,7 +31,7 @@ class MainLayout extends Component {
 
     return (
       <div className={classNames('main-layput-wrapper', className)}>
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Toolbar>
             <IconButton>
               <AccountIcon style={{ fontSize: 34 }} />

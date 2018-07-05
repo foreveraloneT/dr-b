@@ -1,5 +1,5 @@
 {
-    "name": "React Starterkit",
+    "name": "DoctorB_DMfoot",
     "icons": [
         {
             "src": "/static/favicons/android-chrome-192x192.png",
@@ -7,7 +7,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ff1654",
+    "theme_color": "#E0E0E0",
     "background_color": "#ffffff",
     "display": "standalone"
 }

@@ -14,6 +14,11 @@ import { withRouter } from 'react-router-dom'
 import './index.scss'
 
 class NavigationMenu extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+  }
+
   static getDerivedStateFromProps(props) {
     const { location } = props
     switch (location.pathname) {
@@ -32,11 +37,6 @@ class NavigationMenu extends Component {
     page: 0
   }
 
-  static propTypes = {
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-  }
-
   goto = (uri) => {
     const { history } = this.props
     history.push(uri)
@@ -49,6 +49,7 @@ class NavigationMenu extends Component {
         value={page}
         className="navi-menu"
         showLabels
+        {...this.props}
       >
         <BottomNavigationAction
           label=''

@@ -38,7 +38,7 @@ class TitleWithBackLayout extends Component {
     const { className, title } = this.props
     return (
       <div className={classNames('title-layput-wrapper', className)}>
-        <AppBar position="static">
+        <AppBar>
           <Toolbar>
             <IconButton>
               <BackIcon

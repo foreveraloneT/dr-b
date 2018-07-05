@@ -1,6 +1,6 @@
 {
   "name": "dr-b",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Starter template react for web team using webpack4",
   "main": "server.js",
   "scripts": {
