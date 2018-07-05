@@ -1,0 +1,10 @@
+.group-card-wrapper {
+  margin-bottom: 10px;
+  border-bottom: 3px solid black;
+  box-shadow: none !important;
+
+  .card-action {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

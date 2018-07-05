@@ -7,6 +7,7 @@ import Paper from './Paper'
 import ColorPicker from './ColorPicker'
 import SaveButton from './SaveButton'
 import RequiredErrorText from './RequiredErrorText'
+import NoData from './NoData'
 
 export {
   Icon,
@@ -18,4 +19,5 @@ export {
   ColorPicker,
   SaveButton,
   RequiredErrorText,
+  NoData,
 }

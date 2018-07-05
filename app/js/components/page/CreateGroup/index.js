@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { TextField } from '@material-ui/core'
 
@@ -9,9 +12,16 @@ import {
   SaveButton,
   RequiredErrorText,
 } from '../../common'
+import { createGroup } from '../../../actions/group'
 import './index.scss'
 
 class CreateGroup extends Component {
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    createGroupRequest: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+  }
+
   inputName = ''
 
   inputDesc = ''
@@ -19,6 +29,13 @@ class CreateGroup extends Component {
   state = {
     color: ColorPicker.defaultColor,
     nameError: false
+  }
+
+  componentDidUpdate(prevProps) {
+    const { isLoading, history } = this.props
+    if (!isLoading && prevProps.isLoading) {
+      history.push('/')
+    }
   }
 
   onSelectColorHandler = ({ hex: color }) => {
@@ -35,6 +52,7 @@ class CreateGroup extends Component {
 
   doSave = () => {
     const { color } = this.state
+    const { createGroupRequest } = this.props
     const group = {
       name: this.inputName.value,
       description: this.inputDesc.value,
@@ -42,12 +60,12 @@ class CreateGroup extends Component {
     }
     if (this.validate()) {
       this.setState({ nameError: false })
-      console.log(group)
+      createGroupRequest(group)
     }
   }
 
   render() {
-    const { nameError } = this.state
+    const { nameError, color } = this.state
     return (
       <TitleWithBackLayout
         className="create-group-container"
@@ -76,7 +94,7 @@ class CreateGroup extends Component {
             inputRef={(input) => { this.inputDesc = input }}
             margin="normal"
           />
-          <ColorPicker onSelect={this.onSelectColorHandler} />
+          <ColorPicker value={color} onSelect={this.onSelectColorHandler} />
           <div
             style={{
               margin: '10px 0',
@@ -91,4 +109,15 @@ class CreateGroup extends Component {
   }
 }
 
-export default CreateGroup
+const mapStateToProps = state => ({
+  isLoading: state.group.isLoading,
+})
+
+const mapDispatchToProps = dispatch => ({
+  createGroupRequest: (params) => { dispatch(createGroup.request(params)) },
+})
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+)(CreateGroup)

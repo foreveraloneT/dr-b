@@ -12,12 +12,12 @@ const COLOR_SET = [
   '#2196F3',
 ]
 
-const ColorPicker = ({ onSelect, ...props }) => (
+const ColorPicker = ({ onSelect, value, ...props }) => (
   <div className="color-picker-wrapper">
     <CirclePicker
       {...props}
       colors={COLOR_SET}
-      color={COLOR_SET[0]}
+      color={value}
       circleSize={36}
       onChangeComplete={onSelect}
     />

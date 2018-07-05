@@ -7,30 +7,30 @@ export default class BaseModel {
 
   _field = {}
 
-  get _scope() {
+  _scope = () => {
     return Object.keys(this._field)
   }
 
-  _getId() {
+  _getId = () => {
     return Math.random().toString(36).substr(2, 16)
   }
 
-  _getNow() {
+  _getNow = () => {
     return moment().format('x')
   }
 
-  async getAll() {
+  getAll = async () => {
     const data = await localforage.getItem(this._index)
     return data || []
   }
 
-  async getById(id) {
+  getById = async (id) => {
     const dataList = await this.getAll()
     const result = dataList.filter(item => item._id === id)
     return result.length > 0 ? result[0] : null
   }
 
-  async add(item) {
+  add = async (item) => {
     const dataList = await this.getAll()
     const enhanceItem = {
       _id: this._getId(),
@@ -38,20 +38,20 @@ export default class BaseModel {
       updateAt: 0,
       isSync: false,
       ...this._field,
-      ...pick(item, this._scope),
+      ...pick(item, this._scope()),
     }
     await localforage.setItem(this._index, [...dataList, enhanceItem])
-    return item
+    return enhanceItem
   }
 
-  async updateById(id, updateItem) {
+  updateById = async (id, updateItem) => {
     const dataList = await this.getAll()
     let updatedItem
     dataList.forEach((item, order) => {
       if (item._id === id) {
         dataList[order] = {
           ...item,
-          ...pick(updateItem, this._scope),
+          ...pick(updateItem, this._scope()),
           updateAt: this._getNow(),
           isSync: false,
         }
@@ -62,7 +62,7 @@ export default class BaseModel {
     return updatedItem || false
   }
 
-  async deleteById(id) {
+  deleteById = async (id) => {
     const dataList = await this.getAll()
     const deletedList = dataList.filter(item => item._id !== id)
     await localforage.setItem(this._index, deletedList)

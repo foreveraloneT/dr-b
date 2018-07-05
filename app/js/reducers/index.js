@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
 import error from './error'
-import isPing from './ping-pong'
+import group from './group'
 
 const rootReducer = combineReducers({
   error,
-  isPing,
+  group,
 })
 
 export default rootReducer

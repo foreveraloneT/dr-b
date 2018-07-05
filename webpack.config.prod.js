@@ -2,6 +2,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -19,6 +20,10 @@ const copyPlugin = new CopyWebpackPlugin([
 const cssExtractPlugin = new MiniCssExtractPlugin({
   filename: '[name].css',
   chunkFilename: '[id].css'
+})
+
+const offlinePlugin = new OfflinePlugin({
+  appShell: '/',
 })
 
 module.exports = {
@@ -77,5 +82,6 @@ module.exports = {
     htmlPlugin,
     copyPlugin,
     cssExtractPlugin,
+    offlinePlugin,
   ],
 }

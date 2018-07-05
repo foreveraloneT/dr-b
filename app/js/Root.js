@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Route, BrowserRouter as Router, Switch, BrowserRouter } from 'react-router-dom'
 
 import {
@@ -6,19 +8,30 @@ import {
 } from './components/layout'
 import {
   Home,
-  Test,
   CreateGroup,
   Favorite,
   Others,
 } from './components/page'
+import { getAllGroup } from './actions/group'
 
 class Root extends Component {
+  static propTypes = {
+    getAllGroupRequest: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    const {
+      getAllGroupRequest,
+    } = this.props
+
+    getAllGroupRequest()
+  }
+
   render() {
     return (
       <Router>
         <BrowserRouter>
           <Switch>
-            <Route path='/test' exact component={ Test } />
             <Route path='/group/create' exact component={ CreateGroup } />
             <MainLayout>
               <Switch>
@@ -35,4 +48,8 @@ class Root extends Component {
   }
 }
 
-export default Root
+const mapDispatchToProps = {
+  getAllGroupRequest: getAllGroup.request,
+}
+
+export default connect(null, mapDispatchToProps)(Root)

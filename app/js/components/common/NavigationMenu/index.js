@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core'
 import {
   Folder as FolderIcon,
-  Favorite as FavoriteIcon,
+  Star as FavoriteIcon,
   Menu as MenuIcon,
 } from '@material-ui/icons'
 import { withRouter } from 'react-router-dom'

@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 
 import Root from './Root'
 import configureStore from './store/configureStore'
@@ -27,6 +28,11 @@ const renderApp = (Component) => {
     </Provider>,
     rootEl
   )
+}
+
+// offline plugin
+if (process.env.NODE_ENV === 'production') {
+  OfflinePluginRuntime.install()
 }
 
 renderApp(Root)

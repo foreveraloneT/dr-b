@@ -1,10 +1,12 @@
 import { applyMiddleware, compose, createStore } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 
 import loggerMiddleware from '../middlewares/loggerMiddleware'
-import epicMiddleware from '../middlewares/epicMiddleware'
 import rootReducer from '../reducers'
+import rootSaga from '../sagas'
 
-const middlewares = [epicMiddleware]
+const sagaMiddleware = createSagaMiddleware()
+const middlewares = [sagaMiddleware]
 
 if (process.env.NODE_ENV !== 'production') {
   middlewares.push(loggerMiddleware)
@@ -12,6 +14,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 const storeEnhancer = [applyMiddleware(...middlewares)]
 const finalCreateStore = compose(...storeEnhancer)(createStore)
-const configureStore = initialState => finalCreateStore(rootReducer, initialState)
+const configureStore = (initialState) => {
+  const store = finalCreateStore(rootReducer, initialState)
+  sagaMiddleware.run(rootSaga)
+  return store
+}
 
 export default configureStore
