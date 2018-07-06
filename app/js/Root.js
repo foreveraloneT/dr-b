@@ -11,6 +11,7 @@ import {
   CreateGroup,
   Favorite,
   Others,
+  Group,
 } from './components/page'
 import { getAllGroup } from './actions/group'
 
@@ -33,6 +34,7 @@ class Root extends Component {
         <BrowserRouter>
           <Switch>
             <Route path='/group/create' exact component={ CreateGroup } />
+            <Route path='/group/:id' exact component={ Group } />
             <MainLayout>
               <Switch>
                 <Route path='/' exact component={ Home } />

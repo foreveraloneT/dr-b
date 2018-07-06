@@ -13,11 +13,12 @@ import {
 
 import './index.scss'
 
-const GroupCard = ({ group }) => (
+const GroupCard = ({ group, ...props }) => (
   <Card
     elevation={1}
     className="group-card-wrapper"
     style={{ borderColor: group.color }}
+    {...props}
   >
     <CardContent>
       <Typography

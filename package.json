@@ -1,12 +1,13 @@
 {
   "name": "dr-b",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Starter template react for web team using webpack4",
   "main": "server.js",
   "scripts": {
     "start": "npm run clean:dev && webpack-dev-server --mode development --config webpack.config.dev.js --open",
     "deploy": "npm run clean && webpack --mode production --config webpack.config.prod.js",
     "deploy:dev": "npm run clean:dev && webpack --mode development --config webpack.config.dev.js",
+    "deploy:firebase": "npm run deploy && firebase deploy",
     "clean": "rimraf public/*",
     "clean:dev": "rimraf dev/*",
     "server": "node server.js",

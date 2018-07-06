@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import GroupCard from '../GroupCard'
 import { NoData } from '../../common'
@@ -15,10 +16,9 @@ const GroupList = ({ groupList }) => {
       {
         groupList.sort((group1, group2) => group1.createAt < group2.createAt)
           .map(group => (
-            <GroupCard
-              key={group._id}
-              group={group}
-            />
+            <Link key={group._id} to={`/group/${group._id}`}>
+              <GroupCard group={group} />
+            </Link>
           ))
       }
     </div>

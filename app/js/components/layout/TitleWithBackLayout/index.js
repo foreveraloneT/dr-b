@@ -22,6 +22,7 @@ class TitleWithBackLayout extends Component {
     history: PropTypes.object.isRequired,
     className: PropTypes.string,
     title: PropTypes.string,
+    componentAfterAppBar: PropTypes.element,
   }
 
   static defaultProps = {
@@ -35,7 +36,7 @@ class TitleWithBackLayout extends Component {
   }
 
   render() {
-    const { className, title } = this.props
+    const { className, title, componentAfterAppBar, children } = this.props
     return (
       <div className={classNames('title-layput-wrapper', className)}>
         <AppBar>
@@ -50,8 +51,9 @@ class TitleWithBackLayout extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
+        {componentAfterAppBar}
         <Container style={{ marginTop: 10 }}>
-          {this.props.children}
+          {children}
         </Container>
       </div>
     )

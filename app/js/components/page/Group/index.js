@@ -4,15 +4,17 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 
+import { TitleWithBackLayout } from '../../layout'
 import { BottomAddMenu } from '../../common'
-import { GroupList } from '../../feature'
+import { GroupCard } from '../../feature'
 import * as groupSelector from '../../../selectors/group'
 import './index.scss'
 
-class Home extends Component {
+class Group extends Component {
   static propTypes = {
+    match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    groupList: PropTypes.array.isRequired,
+    group: PropTypes.object.isRequired,
   }
 
   goToAddGroupPage = () => {
@@ -21,21 +23,27 @@ class Home extends Component {
   }
 
   render() {
-    const { groupList } = this.props
+    const { group } = this.props
     return (
-      <div className="home-container">
-        <GroupList groupList={groupList} />
+      <TitleWithBackLayout
+        className="group-container"
+        title={group.name}
+        componentAfterAppBar={
+          <GroupCard group={group} square={true} />
+        }
+      >
+
         <BottomAddMenu onClick={this.goToAddGroupPage} />
-      </div>
+      </TitleWithBackLayout>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  groupList: groupSelector.getArray(state),
+const mapStateToProps = (state, { match }) => ({
+  group: groupSelector.getById(state, { id: match.params.id }),
 })
 
 export default compose(
+  connect(mapStateToProps),
   withRouter,
-  connect(mapStateToProps)
-)(Home)
+)(Group)
