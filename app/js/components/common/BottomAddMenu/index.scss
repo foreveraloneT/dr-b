@@ -1,11 +1,10 @@
 .bottom-add-menu-wrapper {
-  height: 50px;
+  height: 48px;
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: white;
+  background-color: #F5F5F5;
   text-align: center;
-  padding-top: 1px;
   z-index: 1000;
-  box-shadow: 0px -1px 0px 1px rgba(232,232,232,1);
+  box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.75);
 }
