@@ -24,7 +24,6 @@ const cssExtractPlugin = new MiniCssExtractPlugin({
 
 const offlinePlugin = new OfflinePlugin({
   appShell: '/',
-  responseStrategy: 'network-first',
 })
 
 module.exports = {
