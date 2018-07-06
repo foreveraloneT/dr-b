@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   Portal,
-  Button,
+  IconButton,
 } from '@material-ui/core'
 import { AddCircleOutline as AddIcon } from '@material-ui/icons'
 
@@ -10,9 +10,7 @@ import './index.scss'
 const BottomAddMenu = props => (
   <Portal>
     <div className="bottom-add-menu-wrapper">
-      <Button
-        variant="outlined"
-        size="large"
+      <IconButton
         { ...props }
       >
         <AddIcon
@@ -21,7 +19,7 @@ const BottomAddMenu = props => (
             color: 'rgba(0, 0, 0, 0.54)',
           }}
         />
-      </Button>
+      </IconButton>
     </div>
   </Portal>
 )
