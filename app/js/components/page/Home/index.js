@@ -32,7 +32,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  groupList: groupSelector.getArray(state),
+  groupList: groupSelector.getArrayWithCountPatient(state),
 })
 
 export default compose(

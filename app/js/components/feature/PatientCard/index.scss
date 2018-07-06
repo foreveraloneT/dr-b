@@ -1,0 +1,21 @@
+$picture-size: 140px;
+
+.patient-card-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  border-left: 10px solid black;
+  box-shadow: none !important;
+  .detail {
+    width: calc(100% - #{$picture-size});
+  }
+  .card-action {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .cover {
+    width: $picture-size;
+    height: $picture-size;
+  }
+}

@@ -8,6 +8,7 @@ import ColorPicker from './ColorPicker'
 import SaveButton from './SaveButton'
 import RequiredErrorText from './RequiredErrorText'
 import NoData from './NoData'
+import ScrollToTop from './ScrollToTop'
 
 export {
   Icon,
@@ -20,4 +21,5 @@ export {
   SaveButton,
   RequiredErrorText,
   NoData,
+  ScrollToTop,
 }

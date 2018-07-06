@@ -27,7 +27,7 @@ const GroupCard = ({ group, ...props }) => (
         component="h2"
         color="primary"
       >
-        {group.name}
+        ({group.countPatient}) {group.name}
       </Typography>
       <Typography component="p">
         {group.description}

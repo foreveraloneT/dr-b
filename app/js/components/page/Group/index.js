@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom'
 
 import { TitleWithBackLayout } from '../../layout'
 import { BottomAddMenu } from '../../common'
-import { GroupCard } from '../../feature'
+import { GroupCard, PatientList } from '../../feature'
 import * as groupSelector from '../../../selectors/group'
+import * as patientSelector from '../../../selectors/patient'
 import './index.scss'
 
 class Group extends Component {
@@ -15,15 +16,16 @@ class Group extends Component {
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     group: PropTypes.object.isRequired,
+    patientList: PropTypes.array.isRequired,
   }
 
   goToAddGroupPage = () => {
-    const { history } = this.props
-    history.push('/group/create')
+    const { history, match } = this.props
+    history.push(`/group/${match.params.id}/patient/create`)
   }
 
   render() {
-    const { group } = this.props
+    const { group, patientList } = this.props
     return (
       <TitleWithBackLayout
         className="group-container"
@@ -32,15 +34,18 @@ class Group extends Component {
           <GroupCard group={group} square={true} />
         }
       >
-
-        <BottomAddMenu onClick={this.goToAddGroupPage} />
+        <div style={{ paddingBottom: 60 }}>
+          <PatientList patientList={patientList} />
+          <BottomAddMenu onClick={this.goToAddGroupPage} />
+        </div>
       </TitleWithBackLayout>
     )
   }
 }
 
 const mapStateToProps = (state, { match }) => ({
-  group: groupSelector.getById(state, { id: match.params.id }),
+  group: groupSelector.getByIdWithCountPatient(state, { id: match.params.id }),
+  patientList: patientSelector.getArrayByGroup(state, { groupId: match.params.id }),
 })
 
 export default compose(

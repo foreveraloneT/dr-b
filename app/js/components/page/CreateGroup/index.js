@@ -31,13 +31,6 @@ class CreateGroup extends Component {
     nameError: false
   }
 
-  componentDidUpdate(prevProps) {
-    const { isLoading, history } = this.props
-    if (!isLoading && prevProps.isLoading) {
-      history.push('/')
-    }
-  }
-
   onSelectColorHandler = ({ hex: color }) => {
     this.setState({ color })
   }
@@ -52,7 +45,7 @@ class CreateGroup extends Component {
 
   doSave = () => {
     const { color } = this.state
-    const { createGroupRequest } = this.props
+    const { createGroupRequest, history } = this.props
     const group = {
       name: this.inputName.value,
       description: this.inputDesc.value,
@@ -61,6 +54,7 @@ class CreateGroup extends Component {
     if (this.validate()) {
       this.setState({ nameError: false })
       createGroupRequest(group)
+      history.goBack()
     }
   }
 

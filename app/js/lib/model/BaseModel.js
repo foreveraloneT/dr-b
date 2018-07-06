@@ -7,30 +7,41 @@ export default class BaseModel {
 
   _field = {}
 
-  _scope = () => {
+  constructor() {
+    this._scope = this._scope.bind(this)
+    this._getId = this._getId.bind(this)
+    this._getNow = this._getNow.bind(this)
+    this.getAll = this.getAll.bind(this)
+    this.getById = this.getById.bind(this)
+    this.add = this.add.bind(this)
+    this.updateById = this.updateById.bind(this)
+    this.deleteById = this.deleteById.bind(this)
+  }
+
+  _scope() {
     return Object.keys(this._field)
   }
 
-  _getId = () => {
+  _getId() {
     return Math.random().toString(36).substr(2, 16)
   }
 
-  _getNow = () => {
+  _getNow() {
     return moment().format('x')
   }
 
-  getAll = async () => {
+  async getAll() {
     const data = await localforage.getItem(this._index)
     return data || []
   }
 
-  getById = async (id) => {
+  async getById(id) {
     const dataList = await this.getAll()
     const result = dataList.filter(item => item._id === id)
     return result.length > 0 ? result[0] : null
   }
 
-  add = async (item) => {
+  async add(item) {
     const dataList = await this.getAll()
     const enhanceItem = {
       _id: this._getId(),
@@ -44,7 +55,7 @@ export default class BaseModel {
     return enhanceItem
   }
 
-  updateById = async (id, updateItem) => {
+  async updateById(id, updateItem) {
     const dataList = await this.getAll()
     let updatedItem
     dataList.forEach((item, order) => {
@@ -62,7 +73,7 @@ export default class BaseModel {
     return updatedItem || false
   }
 
-  deleteById = async (id) => {
+  async deleteById(id) {
     const dataList = await this.getAll()
     const deletedList = dataList.filter(item => item._id !== id)
     await localforage.setItem(this._index, deletedList)

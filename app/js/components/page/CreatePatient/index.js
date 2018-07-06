@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { TextField } from '@material-ui/core'
+import { TextField, MenuItem } from '@material-ui/core'
+import moment from 'moment'
 
 import { TitleWithBackLayout } from '../../layout'
 import {
@@ -12,30 +13,44 @@ import {
   SaveButton,
   RequiredErrorText,
 } from '../../common'
-import { createGroup } from '../../../actions/group'
+import { createPatient } from '../../../actions/patient'
 import './index.scss'
 
-class CreateGroup extends Component {
+const genders = [
+  {
+    value: 'male',
+    label: 'Male',
+  },
+  {
+    value: 'female',
+    label: 'Female',
+  },
+]
+
+class CreatePatient extends Component {
   static propTypes = {
-    isLoading: PropTypes.bool.isRequired,
-    createGroupRequest: PropTypes.func.isRequired,
+    createPatientRequest: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
   }
 
-  inputName = ''
+  inputId = null
 
-  inputDesc = ''
+  inputFirstname = null
+
+  inputLastname = null
+
+  inputNote = null
+
+  inputYear = null
 
   state = {
     color: ColorPicker.defaultColor,
-    nameError: false
-  }
-
-  componentDidUpdate(prevProps) {
-    const { isLoading, history } = this.props
-    if (!isLoading && prevProps.isLoading) {
-      history.push('/')
-    }
+    gender: genders[0].value,
+    idError: false,
+    firstnameError: false,
+    lastnameError: false,
+    yearError: false,
   }
 
   onSelectColorHandler = ({ hex: color }) => {
@@ -43,57 +58,155 @@ class CreateGroup extends Component {
   }
 
   validate = () => {
-    if (this.inputName.value.length > 0) {
+    if (
+      this.inputId.value.length > 0 &&
+      this.inputFirstname.value.length > 0 &&
+      this.inputLastname.value.length > 0 &&
+      this.inputYear.value.length > 0
+    ) {
       return true
     }
-    this.setState({ nameError: true })
+
+    if (this.inputId.value.length === 0) {
+      this.setState({ idError: true })
+    }
+
+    if (this.inputFirstname.value.length === 0) {
+      this.setState({ firstnameError: true })
+    }
+
+    if (this.inputLastname.value.length === 0) {
+      this.setState({ lastnameError: true })
+    }
+
+    if (this.inputYear.value.length === 0) {
+      this.setState({ yearError: true })
+    }
     return false
   }
 
   doSave = () => {
-    const { color } = this.state
-    const { createGroupRequest } = this.props
-    const group = {
-      name: this.inputName.value,
-      description: this.inputDesc.value,
+    const { color, gender } = this.state
+    const { createPatientRequest, history, match } = this.props
+    const groupId = match.params.groupId
+    const item = {
+      id: this.inputId.value,
+      firstname: this.inputFirstname.value,
+      lastname: this.inputLastname.value,
+      yearOfBirth: Number(this.inputYear.value),
+      gender,
+      note: this.inputNote.value,
       color,
+      groupId,
     }
     if (this.validate()) {
-      this.setState({ nameError: false })
-      createGroupRequest(group)
+      this.setState({
+        idError: false,
+        firstnameError: false,
+        lastnameError: false,
+        yearError: false,
+      })
+      createPatientRequest(item)
+      history.goBack()
     }
   }
 
+  handleChange = name => (event) => {
+    this.setState({ [name]: event.target.value })
+  }
+
   render() {
-    const { nameError, color } = this.state
+    const {
+      idError,
+      firstnameError,
+      lastnameError,
+      yearError,
+      gender,
+      color
+    } = this.state
     return (
       <TitleWithBackLayout
         className="create-group-container"
-        title="Add new group"
+        title="Add new patient"
       >
         <Paper>
           <TextField
-            id="group-name"
-            label="Name"
-            placeholder="group name"
+            id="patient-id"
+            label="ID"
+            placeholder="patient ID"
             margin="normal"
             fullWidth
-            inputRef={(input) => { this.inputName = input }}
+            inputRef={(input) => { this.inputId = input }}
             required
-            error={nameError}
+            error={idError}
           />
-          <RequiredErrorText isShow={nameError} />
+          <RequiredErrorText isShow={idError} />
 
           <TextField
-            id="group-description"
-            label="Description"
-            placeholder="description (optional)"
+            id="patient-fname"
+            label="Firstname"
+            placeholder="firstname"
+            margin="normal"
+            fullWidth
+            inputRef={(input) => { this.inputFirstname = input }}
+            required
+            error={firstnameError}
+          />
+          <RequiredErrorText isShow={firstnameError} />
+
+          <TextField
+            id="patient-lname"
+            label="Lastname"
+            placeholder="lastname"
+            margin="normal"
+            fullWidth
+            inputRef={(input) => { this.inputLastname = input }}
+            required
+            error={lastnameError}
+          />
+          <RequiredErrorText isShow={lastnameError} />
+
+          <TextField
+            id="patient-year"
+            label="Year of birth"
+            placeholder="ex. 1992"
+            defaultValue={moment().format('YYYY')}
+            type="number"
+            margin="normal"
+            fullWidth
+            inputRef={(input) => { this.inputYear = input }}
+            required
+            error={yearError}
+          />
+          <RequiredErrorText isShow={yearError} />
+
+          <TextField
+            id="patient-gender"
+            select
+            fullWidth
+            label="Gender"
+            value={gender}
+            margin="normal"
+            onChange={this.handleChange('gender')}
+          >
+            {genders.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            id="patient-note"
+            label="Note"
+            placeholder="Note (optional)"
             multiline
             fullWidth
             rows="2"
-            inputRef={(input) => { this.inputDesc = input }}
+            inputRef={(input) => { this.inputNote = input }}
             margin="normal"
           />
+
           <ColorPicker value={color} onSelect={this.onSelectColorHandler} />
           <div
             style={{
@@ -109,15 +222,11 @@ class CreateGroup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isLoading: state.group.isLoading,
-})
-
 const mapDispatchToProps = dispatch => ({
-  createGroupRequest: (params) => { dispatch(createGroup.request(params)) },
+  createPatientRequest: (params) => { dispatch(createPatient.request(params)) },
 })
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
   withRouter,
-)(CreateGroup)
+)(CreatePatient)

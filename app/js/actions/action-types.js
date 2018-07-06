@@ -20,3 +20,6 @@ export const makeBasicActionCreator = (requestAction, successAction, failureActi
 
 export const CREATE_GROUP = getBasicAction('CREATE_GROUP')
 export const GET_LIST_GROUP = getBasicAction('GET_LIST_GROUP')
+
+export const CREATE_PATIENT = getBasicAction('CREATE_PATIENT')
+export const GET_LIST_PATIENT = getBasicAction('GET_LIST_PATIENT')

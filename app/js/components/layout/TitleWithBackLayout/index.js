@@ -15,7 +15,7 @@ import { withRouter } from 'react-router-dom'
 import {
   AppBar,
 } from '../../common'
-// import './index.scss'
+import './index.scss'
 
 class TitleWithBackLayout extends Component {
   static propTypes = {
@@ -39,7 +39,7 @@ class TitleWithBackLayout extends Component {
     const { className, title, componentAfterAppBar, children } = this.props
     return (
       <div className={classNames('title-layput-wrapper', className)}>
-        <AppBar>
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton>
               <BackIcon
