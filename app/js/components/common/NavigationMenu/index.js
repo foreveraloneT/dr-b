@@ -49,7 +49,6 @@ class NavigationMenu extends Component {
         value={page}
         className="navi-menu"
         showLabels
-        {...this.props}
       >
         <BottomNavigationAction
           label=''
