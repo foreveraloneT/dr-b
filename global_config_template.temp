@@ -1,4 +1,0 @@
-_globalConfig = {
-  PRODUCTION_VRESION: \"${prd_version}\",
-  API_ENDPOINT: \"${host}\",
-}

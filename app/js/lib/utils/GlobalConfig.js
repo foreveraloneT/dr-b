@@ -4,7 +4,6 @@ class GlobalConfig {
   static _config = {
     ENVIRONMENT: process.env.NODE_ENV || 'development',
     APP_VERSION: pjson.version,
-    ..._globalConfig,
   }
 
   static get(key = '') {
