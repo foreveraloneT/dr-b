@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { isFunction, omit } from 'lodash'
 import {
   Card,
   CardContent,
@@ -16,25 +17,29 @@ class GroupCard extends Component {
   static propTypes = {
     group: PropTypes.object.isRequired,
     deleteGroupRequest: PropTypes.func.isRequired,
+    onDeleteSuccess: PropTypes.func,
   }
 
   doDeleteGroup = () => {
-    const { group, deleteGroupRequest } = this.props
+    const { group, deleteGroupRequest, onDeleteSuccess } = this.props
     if (group.countPatient === 0) {
       deleteGroupRequest(group._id)
+      if (isFunction(onDeleteSuccess)) {
+        onDeleteSuccess()
+      }
     } else {
       alert('Error, please remove all patient in this group before this action !!!')
     }
   }
 
   render() {
-    const { group, deleteGroupRequest, ...props } = this.props
+    const { group, ...props } = this.props
     return (
       <Card
         elevation={1}
         className="group-card-wrapper"
         style={{ borderColor: group.color }}
-        {...props}
+        {...omit(props, ['onDeleteSuccess', 'deleteGroupRequest'])}
       >
         <CardContent>
           <Typography

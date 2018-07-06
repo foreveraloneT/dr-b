@@ -19,24 +19,28 @@ class Group extends Component {
     patientList: PropTypes.array.isRequired,
   }
 
-  goToAddGroupPage = () => {
+  goToAddPatientPage = () => {
     const { history, match } = this.props
     history.push(`/group/${match.params.id}/patient/create`)
   }
 
   render() {
-    const { group, patientList } = this.props
+    const { group, patientList, history } = this.props
     return (
       <TitleWithBackLayout
         className="group-container"
         title={group.name}
         componentAfterAppBar={
-          <GroupCard group={group} square={true} />
+          <GroupCard
+            group={group}
+            square={true}
+            onDeleteSuccess={() => { history.goBack() }}
+          />
         }
       >
         <div style={{ paddingBottom: 60 }}>
           <PatientList patientList={patientList} />
-          <BottomAddMenu onClick={this.goToAddGroupPage} />
+          <BottomAddMenu onClick={this.goToAddPatientPage} />
         </div>
       </TitleWithBackLayout>
     )
