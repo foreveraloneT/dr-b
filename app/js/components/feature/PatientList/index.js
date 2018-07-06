@@ -24,7 +24,11 @@ class PatientList extends Component {
         {
           patientList.sort((patient1, patient2) => parseInt(patient2.createAt, 10) - parseInt(patient1.createAt, 10))
             .map(patient => (
-              <PatientCard key={patient._id} patient={patient} />
+              <PatientCard
+                key={patient._id}
+                patient={patient}
+                onClick={() => { history.push(`/patient/${patient._id}`) }}
+              />
             ))
         }
       </div>

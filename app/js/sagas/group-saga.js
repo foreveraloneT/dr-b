@@ -9,10 +9,12 @@ import {
 import {
   CREATE_GROUP,
   GET_LIST_GROUP,
+  DELETE_GROUP,
 } from '../actions/action-types'
 import {
   createGroup,
   getAllGroup,
+  deleteGroup,
 } from '../actions/group'
 import Group from '../lib/model/Group'
 
@@ -37,6 +39,15 @@ export function* doGetGroup() {
   }
 }
 
+export function* doDeleteGroup({ id }) {
+  try {
+    yield call(group.deleteById, id)
+    yield put(deleteGroup.success(id))
+  } catch (error) {
+    yield put(deleteGroup.failure(error))
+  }
+}
+
 // watcher
 export function* watchCreateGroupRequest() {
   yield throttle(500, CREATE_GROUP.REQUEST, doCreateGroup)
@@ -46,9 +57,14 @@ export function* watchGetAllGroupRequest() {
   yield takeEvery(GET_LIST_GROUP.REQUEST, doGetGroup)
 }
 
+export function* watchDeleteGroupRequest() {
+  yield yield throttle(500, DELETE_GROUP.REQUEST, doDeleteGroup)
+}
+
 export default function* homeSaga() {
   yield all([
     watchCreateGroupRequest(),
     watchGetAllGroupRequest(),
+    watchDeleteGroupRequest(),
   ])
 }

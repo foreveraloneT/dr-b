@@ -9,6 +9,9 @@ import SaveButton from './SaveButton'
 import RequiredErrorText from './RequiredErrorText'
 import NoData from './NoData'
 import ScrollToTop from './ScrollToTop'
+import RenderModal from './RenderModal'
+import ConfirmDialog from './ConfirmDialog'
+import DeleteButtonIcon from './DeleteButtonIcon'
 
 export {
   Icon,
@@ -22,4 +25,7 @@ export {
   RequiredErrorText,
   NoData,
   ScrollToTop,
+  RenderModal,
+  ConfirmDialog,
+  DeleteButtonIcon,
 }

@@ -1,9 +1,10 @@
-import { keyBy } from 'lodash'
+import { keyBy, omit } from 'lodash'
 
 import createReducer from '../lib/utils/create-reducer'
 import {
   GET_LIST_GROUP,
   CREATE_GROUP,
+  DELETE_GROUP,
 } from '../actions/action-types'
 
 const initialState = {
@@ -49,6 +50,23 @@ export default createReducer(
       isLoading: false,
       isError: true,
       data: {},
+    }),
+    // delete
+    // create
+    [DELETE_GROUP.REQUEST]: state => ({
+      ...state,
+      isError: false,
+      isLoading: true,
+    }),
+    [DELETE_GROUP.SUCCESS]: (state, action) => ({
+      isLoading: false,
+      isError: false,
+      data: omit(state.data, [action.id])
+    }),
+    [DELETE_GROUP.FAILURE]: state => ({
+      ...state,
+      isLoading: false,
+      isError: true,
     }),
   }
 )

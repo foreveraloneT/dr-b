@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
-
 import GroupCard from '../GroupCard'
 import { NoData } from '../../common'
-
 
 class GroupList extends Component {
   static propTypes = {
