@@ -31,3 +31,7 @@ export const DELETE_GROUP = getBasicAction('DELETE_GROUP')
 export const CREATE_PATIENT = getBasicAction('CREATE_PATIENT')
 export const GET_LIST_PATIENT = getBasicAction('GET_LIST_PATIENT')
 export const DELETE_PATIENT = getBasicAction('DELETE_PATIENT')
+
+export const CREATE_CARE = getBasicAction('CREATE_CARE')
+export const GET_LIST_CARE = getBasicAction('GET_LIST_CARE')
+export const DELETE_CARE = getBasicAction('DELETE_GROUP')

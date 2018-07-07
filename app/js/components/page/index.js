@@ -5,6 +5,7 @@ import Others from './Others'
 import Group from './Group'
 import CreatePatient from './CreatePatient'
 import Patient from './Patient'
+import CreateCareInfo from './CreateCareInfo'
 
 export {
   Home,
@@ -14,4 +15,5 @@ export {
   Group,
   CreatePatient,
   Patient,
+  CreateCareInfo,
 }

@@ -17,10 +17,10 @@ class Patient extends Component {
     patient: PropTypes.object.isRequired,
   }
 
-  // goToAddGroupPage = () => {
-  //   const { history, match } = this.props
-  //   history.push(`/group/${match.params.id}/patient/create`)
-  // }
+  goToAddCareInfoPage = () => {
+    const { history, match } = this.props
+    history.push(`/patient/${match.params.id}/care-info/create`)
+  }
 
   render() {
     const { patient, history } = this.props
@@ -37,7 +37,7 @@ class Patient extends Component {
         }
       >
         <div style={{ paddingBottom: 60 }}>
-          <BottomAddMenu onClick={() => {}} />
+          <BottomAddMenu onClick={this.goToAddCareInfoPage} />
         </div>
       </TitleWithBackLayout>
     )
