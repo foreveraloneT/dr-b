@@ -9,10 +9,12 @@ import {
 import {
   CREATE_PATIENT,
   GET_LIST_PATIENT,
+  DELETE_PATIENT,
 } from '../actions/action-types'
 import {
   createPatient,
   getAllPatient,
+  deletePatient,
 } from '../actions/patient'
 import Patient from '../lib/model/Patient'
 
@@ -24,7 +26,6 @@ export function* doCreatePatient({ params }) {
     const result = yield call(patient.add, params)
     yield put(createPatient.success(result))
   } catch (error) {
-    console.log(error)
     yield put(createPatient.failure(error))
   }
 }
@@ -38,6 +39,16 @@ export function* doGetPatient() {
   }
 }
 
+export function* doDeletePatient({ id }) {
+  try {
+    yield call(patient.deleteById, id)
+    yield put(deletePatient.success(id))
+  } catch (error) {
+    yield put(deletePatient.failure(error))
+  }
+}
+
+
 // watcher
 export function* watchCreatePatientRequest() {
   yield throttle(500, CREATE_PATIENT.REQUEST, doCreatePatient)
@@ -47,9 +58,14 @@ export function* watchGetAllPatientRequest() {
   yield takeEvery(GET_LIST_PATIENT.REQUEST, doGetPatient)
 }
 
+export function* watchDeleteGroupRequest() {
+  yield yield throttle(500, DELETE_PATIENT.REQUEST, doDeletePatient)
+}
+
 export default function* homeSaga() {
   yield all([
     watchCreatePatientRequest(),
     watchGetAllPatientRequest(),
+    watchDeleteGroupRequest(),
   ])
 }

@@ -52,7 +52,6 @@ export default createReducer(
       data: {},
     }),
     // delete
-    // create
     [DELETE_GROUP.REQUEST]: state => ({
       ...state,
       isError: false,

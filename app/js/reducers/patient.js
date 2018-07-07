@@ -4,6 +4,7 @@ import createReducer from '../lib/utils/create-reducer'
 import {
   GET_LIST_PATIENT,
   CREATE_PATIENT,
+  DELETE_PATIENT,
 } from '../actions/action-types'
 
 const initialState = {
@@ -49,6 +50,22 @@ export default createReducer(
       isLoading: false,
       isError: true,
       data: {},
+    }),
+    // delete
+    [DELETE_PATIENT.REQUEST]: state => ({
+      ...state,
+      isError: false,
+      isLoading: true,
+    }),
+    [DELETE_PATIENT.SUCCESS]: (state, action) => ({
+      isLoading: false,
+      isError: false,
+      data: omit(state.data, [action.id])
+    }),
+    [DELETE_PATIENT.FAILURE]: state => ({
+      ...state,
+      isLoading: false,
+      isError: true,
     }),
   }
 )

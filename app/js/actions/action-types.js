@@ -30,3 +30,4 @@ export const DELETE_GROUP = getBasicAction('DELETE_GROUP')
 
 export const CREATE_PATIENT = getBasicAction('CREATE_PATIENT')
 export const GET_LIST_PATIENT = getBasicAction('GET_LIST_PATIENT')
+export const DELETE_PATIENT = getBasicAction('DELETE_PATIENT')
