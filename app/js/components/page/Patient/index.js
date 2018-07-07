@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom'
 
 import { TitleWithBackLayout } from '../../layout'
 import { BottomAddMenu } from '../../common'
-import { PatientCard } from '../../feature'
+import { PatientCard, CareInfoList } from '../../feature'
 import * as patientSelector from '../../../selectors/patient'
+import * as careInfoSelector from '../../../selectors/care-info'
 import './index.scss'
 
 class Patient extends Component {
@@ -15,6 +16,7 @@ class Patient extends Component {
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     patient: PropTypes.object.isRequired,
+    careInfoList: PropTypes.array.isRequired,
   }
 
   goToAddCareInfoPage = () => {
@@ -23,7 +25,7 @@ class Patient extends Component {
   }
 
   render() {
-    const { patient, history } = this.props
+    const { patient, history, careInfoList } = this.props
     return (
       <TitleWithBackLayout
         className="patient-container"
@@ -36,6 +38,7 @@ class Patient extends Component {
           />
         }
       >
+        <CareInfoList careInfoList={careInfoList} />
         <div style={{ paddingBottom: 60 }}>
           <BottomAddMenu onClick={this.goToAddCareInfoPage} />
         </div>
@@ -46,6 +49,7 @@ class Patient extends Component {
 
 const mapStateToProps = (state, { match }) => ({
   patient: patientSelector.getByIdWithCountCareInfo(state, { id: match.params.id }),
+  careInfoList: careInfoSelector.getArrayByPatient(state, { patientId: match.params.id })
 })
 
 export default compose(

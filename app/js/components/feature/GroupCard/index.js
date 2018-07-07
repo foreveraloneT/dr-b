@@ -8,6 +8,7 @@ import {
   CardActions,
   Typography,
 } from '@material-ui/core'
+import { Person as PersonIcon } from '@material-ui/icons'
 
 import { DeleteButtonIcon } from '../../common'
 import { deleteGroup } from '../../../actions/group'
@@ -48,8 +49,23 @@ class GroupCard extends Component {
             component="h2"
             color="primary"
           >
-            ({group.countPatient}) {group.name}
+            {group.name}
           </Typography>
+          <div>
+            <PersonIcon style={{ fontSize: 18 }} />
+            <Typography
+              component="div"
+              style={{
+                display: 'inline-block',
+                fontSize: 14,
+                position: 'relative',
+                left: 2,
+                top: -3,
+              }}
+            >
+              {group.countPatient}
+            </Typography>
+          </div>
           <Typography component="p">
             {group.description}
           </Typography>
