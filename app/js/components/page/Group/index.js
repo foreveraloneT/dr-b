@@ -49,7 +49,7 @@ class Group extends Component {
 
 const mapStateToProps = (state, { match }) => ({
   group: groupSelector.getByIdWithCountPatient(state, { id: match.params.id }),
-  patientList: patientSelector.getArrayByGroup(state, { groupId: match.params.id }),
+  patientList: patientSelector.getArrayByGroupWithCountCareInfo(state, { groupId: match.params.id }),
 })
 
 export default compose(

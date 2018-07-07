@@ -7,7 +7,7 @@ export default class Group extends BaseModel {
     date: '',
     debridement: '',
     adjunctive: '',
-    oxygenTheraphy: '',
+    oxygenTherapy: '',
     remark: '',
     patientId: '',
     color: '#000000',

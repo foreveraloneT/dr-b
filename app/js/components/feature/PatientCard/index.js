@@ -10,6 +10,7 @@ import {
   CardActions,
   Typography,
 } from '@material-ui/core'
+import { LocalHospital as HospitalIcon } from '@material-ui/icons'
 
 import { DeleteButtonIcon } from '../../common'
 import { deletePatient } from '../../../actions/patient'
@@ -42,10 +43,26 @@ class PatientCard extends Component {
         style={{ borderColor: patient.color }}
         {...omit(props, ['deletePatientRequest', 'onDeleteSuccess'])}
       >
-        <CardMedia
-          className="cover"
-          image={patient.gender === 'male' ? malePic : femalePic}
-        />
+        <div className="avatar-detail">
+          <CardMedia
+            className="cover"
+            image={patient.gender === 'male' ? malePic : femalePic}
+          />
+          <Typography align="center" component="div">
+            <HospitalIcon />
+            <div
+              style={{
+                display: 'inline-block',
+                position: 'relative',
+                top: -4,
+                left: 2,
+              }}
+            >
+              <h1>{patient.countCareInfo}</h1>
+            </div>
+          </Typography>
+        </div>
+
         <div className="detail">
           <CardContent>
             <Typography

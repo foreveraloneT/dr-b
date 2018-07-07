@@ -45,7 +45,7 @@ class Patient extends Component {
 }
 
 const mapStateToProps = (state, { match }) => ({
-  patient: patientSelector.getById(state, { id: match.params.id }),
+  patient: patientSelector.getByIdWithCountCareInfo(state, { id: match.params.id }),
 })
 
 export default compose(

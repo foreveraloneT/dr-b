@@ -19,21 +19,25 @@ import {
 import { ScrollToTop } from './components/common'
 import { getAllGroup } from './actions/group'
 import { getAllPatient } from './actions/patient'
+import { getAllCareInfo } from './actions/care-info'
 
 class Root extends Component {
   static propTypes = {
     getAllGroupRequest: PropTypes.func.isRequired,
     getAllPatientRequest: PropTypes.func.isRequired,
+    getAllCareInfoRequest: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     const {
       getAllGroupRequest,
       getAllPatientRequest,
+      getAllCareInfoRequest,
     } = this.props
 
     getAllGroupRequest()
     getAllPatientRequest()
+    getAllCareInfoRequest()
   }
 
   render() {
@@ -66,6 +70,7 @@ class Root extends Component {
 const mapDispatchToProps = {
   getAllGroupRequest: getAllGroup.request,
   getAllPatientRequest: getAllPatient.request,
+  getAllCareInfoRequest: getAllCareInfo.request,
 }
 
 export default connect(null, mapDispatchToProps)(Root)

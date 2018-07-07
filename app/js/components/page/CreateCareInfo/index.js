@@ -99,7 +99,7 @@ class CreateCareInfo extends Component {
       oxygenTherapy,
     } = this.state
     const { createCareInfoRequest, history, match } = this.props
-    const partientId = match.params.patientId
+    const patientId = match.params.patientId
     const item = {
       date: moment(this.inputDate.value).format('x'),
       debridement,
@@ -107,7 +107,7 @@ class CreateCareInfo extends Component {
       oxygenTherapy,
       remark: this.inputRemark.value,
       color,
-      partientId,
+      patientId,
     }
     if (this.validate()) {
       createCareInfoRequest(item)
