@@ -27,6 +27,7 @@ class CareInfoList extends Component {
               <CareInfoCard
                 key={info._id}
                 careInfo={info}
+                onClick={() => { history.push(`/care-info/${info._id}`) }}
               />
             ))
         }

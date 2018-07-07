@@ -15,6 +15,7 @@ import {
   CreatePatient,
   Patient,
   CreateCareInfo,
+  CareInfo,
 } from './components/page'
 import { ScrollToTop } from './components/common'
 import { getAllGroup } from './actions/group'
@@ -51,6 +52,7 @@ class Root extends Component {
               <Route path='/group/:groupId/patient/create' exact component={ CreatePatient } />
               <Route path='/patient/:id' exact component={ Patient } />
               <Route path='/patient/:patientId/care-info/create' exact component={ CreateCareInfo } />
+              <Route path='/care-info/:id' exact component={ CareInfo } />
               <MainLayout>
                 <Switch>
                   <Route path='/' exact component={ Home } />

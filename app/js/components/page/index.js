@@ -6,6 +6,7 @@ import Group from './Group'
 import CreatePatient from './CreatePatient'
 import Patient from './Patient'
 import CreateCareInfo from './CreateCareInfo'
+import CareInfo from './CareInfo'
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   CreatePatient,
   Patient,
   CreateCareInfo,
+  CareInfo,
 }

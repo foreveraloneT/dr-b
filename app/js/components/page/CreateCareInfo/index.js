@@ -13,57 +13,12 @@ import {
   SaveButton,
 } from '../../common'
 import { createCareInfo } from '../../../actions/care-info'
+import {
+  debridements,
+  adjunctives,
+  oxygenTherapies,
+} from '../../../lib/constants/select-option'
 import './index.scss'
-
-const debridements = [
-  {
-    value: 'Sharp',
-    label: 'Sharp',
-  },
-  {
-    value: 'Ultrasonic',
-    label: 'Ultrasonic',
-  },
-  {
-    value: 'Versajet',
-    label: 'Versajet',
-  },
-]
-
-const adjunctives = [
-  {
-    value: 'PRP',
-    label: 'PRP',
-  },
-  {
-    value: 'Mensen. cell',
-    label: 'Mensen. cell',
-  },
-  {
-    value: 'Plasma',
-    label: 'Plasma',
-  },
-  {
-    value: 'Shock wave',
-    label: 'Shock wave',
-  },
-]
-
-const oxygenTherapies = [
-  {
-    value: 'Hb spray',
-    label: 'Hb spray',
-  },
-  {
-    value: 'Natrox',
-    label: 'Natrox',
-  },
-  {
-    value: 'HBOT',
-    label: 'HBOT',
-  },
-]
-
 
 class CreateCareInfo extends Component {
   static propTypes = {
