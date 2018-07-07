@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { isFunction, omit } from 'lodash'
 import moment from 'moment'
 import {
   Card,
@@ -7,60 +9,74 @@ import {
   CardMedia,
   CardActions,
   Typography,
-  IconButton,
 } from '@material-ui/core'
-import {
-  Delete as DeleteIcon,
-} from '@material-ui/icons'
 
+import { DeleteButtonIcon } from '../../common'
+import { deletePatient } from '../../../actions/patient'
 import './index.scss'
 
-// const basePath = '/static/'
 const malePic = '/static/images/male.png'
 const femalePic = '/static/images/female.png'
 
-const PatientCard = ({ patient, ...props }) => (
-  <Card
-    elevation={1}
-    className="patient-card-wrapper"
-    style={{ borderColor: patient.color }}
-    {...props}
-  >
-    <CardMedia
-      className="cover"
-      image={patient.gender === 'male' ? malePic : femalePic}
-    />
-    <div className="detail">
-      <CardContent>
-        <Typography
-          gutterBottom
-          variant="headline"
-          component="h2"
-          color="primary"
-        >
-          {patient.fullname}
-        </Typography>
-        <Typography><b>ID:</b> {patient.id}</Typography>
-        <Typography><b>Gender:</b> {patient.gender}</Typography>
-        <Typography><b>Age:</b> {Number(moment().format('YYYY')) - Number(patient.yearOfBirth)}</Typography>
-        <Typography component="p" style={{ marginTop: 8 }}>
-          {patient.note}
-        </Typography>
-      </CardContent>
-      <CardActions
-        disableActionSpacing
-        className="card-action"
-      >
-        <IconButton>
-          <DeleteIcon />
-        </IconButton>
-      </CardActions>
-    </div>
-  </Card>
-)
+class PatientCard extends Component {
+  static propTypes = {
+    patient: PropTypes.object.isRequired,
+    deletePatientRequest: PropTypes.func.isRequired,
+    onDeleteSuccess: PropTypes.func,
+  }
 
-PatientCard.propTypes = {
-  patient: PropTypes.object.isRequired,
+  doDeletePatient = () => {
+    const { patient, deletePatientRequest, onDeleteSuccess } = this.props
+    deletePatientRequest(patient._id)
+    if (isFunction(onDeleteSuccess)) {
+      onDeleteSuccess()
+    }
+  }
+
+  render() {
+    const { patient, ...props } = this.props
+    return (
+      <Card
+        elevation={1}
+        className="patient-card-wrapper"
+        style={{ borderColor: patient.color }}
+        {...omit(props, ['deletePatientRequest', 'onDeleteSuccess'])}
+      >
+        <CardMedia
+          className="cover"
+          image={patient.gender === 'male' ? malePic : femalePic}
+        />
+        <div className="detail">
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="headline"
+              component="h2"
+              color="primary"
+            >
+              {patient.fullname}
+            </Typography>
+            <Typography><b>ID:</b> {patient.id}</Typography>
+            <Typography><b>Gender:</b> {patient.gender}</Typography>
+            <Typography><b>Age:</b> {Number(moment().format('YYYY')) - Number(patient.yearOfBirth)}</Typography>
+            <Typography component="p" style={{ marginTop: 8 }}>
+              {patient.note}
+            </Typography>
+          </CardContent>
+          <CardActions
+            disableActionSpacing
+            className="card-action"
+          >
+            <DeleteButtonIcon onDelete={this.doDeletePatient} />
+          </CardActions>
+        </div>
+      </Card>
+    )
+  }
 }
 
-export default PatientCard
+const mapDispatchToProps = {
+  deletePatientRequest: deletePatient.request,
+}
+
+export default connect(null, mapDispatchToProps)(PatientCard)

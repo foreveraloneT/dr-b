@@ -23,13 +23,17 @@ class Patient extends Component {
   // }
 
   render() {
-    const { patient } = this.props
+    const { patient, history } = this.props
     return (
       <TitleWithBackLayout
         className="patient-container"
         title={patient.fullname}
         componentAfterAppBar={
-          <PatientCard patient={patient} square={true} />
+          <PatientCard
+            patient={patient}
+            square={true}
+            onDeleteSuccess={() => { history.goBack() }}
+          />
         }
       >
         <div style={{ paddingBottom: 60 }}>
