@@ -90,12 +90,12 @@ class CreatePatient extends Component {
     const { createPatientRequest, history, match } = this.props
     const groupId = match.params.groupId
     const item = {
-      id: this.inputId.value,
-      firstname: this.inputFirstname.value,
-      lastname: this.inputLastname.value,
+      id: this.inputId.value.trim(),
+      firstname: this.inputFirstname.value.trim(),
+      lastname: this.inputLastname.value.trim(),
       yearOfBirth: Number(this.inputYear.value),
       gender,
-      note: this.inputNote.value,
+      note: this.inputNote.value.trim(),
       color,
       groupId,
     }

@@ -105,7 +105,7 @@ class CreateCareInfo extends Component {
       debridement,
       adjunctive,
       oxygenTherapy,
-      remark: this.inputRemark.value,
+      remark: this.inputRemark.value.trim(),
       color,
       patientId,
     }

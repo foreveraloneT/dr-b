@@ -47,8 +47,8 @@ class CreateGroup extends Component {
     const { color } = this.state
     const { createGroupRequest, history } = this.props
     const group = {
-      name: this.inputName.value,
-      description: this.inputDesc.value,
+      name: this.inputName.value.trim(),
+      description: this.inputDesc.value.trim(),
       color,
     }
     if (this.validate()) {
