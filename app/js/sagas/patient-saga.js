@@ -17,8 +17,10 @@ import {
   deletePatient,
 } from '../actions/patient'
 import Patient from '../lib/model/Patient'
+import CareInfo from '../lib/model/CareInfo'
 
 const patient = new Patient()
+const careInfo = new CareInfo()
 
 // worker
 export function* doCreatePatient({ params }) {
@@ -41,7 +43,10 @@ export function* doGetPatient() {
 
 export function* doDeletePatient({ id }) {
   try {
-    yield call(patient.deleteById, id)
+    const canDelete = yield call(patient.deleteById, id)
+    if (canDelete) {
+      yield call(careInfo.deleteByPatientId, id)
+    }
     yield put(deletePatient.success(id))
   } catch (error) {
     yield put(deletePatient.failure(error))
